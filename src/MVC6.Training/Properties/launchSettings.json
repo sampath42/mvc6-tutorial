@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:49996/",
+      "applicationUrl": "http://localhost:5000/",
       "sslPort": 0
     }
   },
@@ -12,7 +12,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "app:appName": "MVC 6 Demo from Environment variables",
+        "ASPNETCORE_ENVIRONMENT": "debug"
       }
     },
     "MVC6.Training": {

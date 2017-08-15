@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace MVC6.Training
 {
@@ -38,7 +39,7 @@ namespace MVC6.Training
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("config.json")
-                .AddJsonFile($"config.{env.EnvironmentName}.json", true)
+                .AddJsonFile($"config.{env.EnvironmentName}.json", false)
                 .AddEnvironmentVariables();
 
             config = builder.Build();
@@ -56,21 +57,28 @@ namespace MVC6.Training
 
             services.AddMvc(options =>
             {
-                //options.OutputFormatters
+                // will use with web api
+                //options.OutputFormatters.Add(new Microsoft.AspNetCore.Mvc.Formatters.Xml.d())
                 //options.RespectBrowserAcceptHeader = true;
-                //options.Filters.Add               
+
+                //options.Filters.Add     
+
+            }).AddViewOptions(options =>
+            {
+                //options.ViewEngines.Add
+                //options.HtmlHelperOptions
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             //loggerFactory.AddConsole();
 
@@ -79,7 +87,7 @@ namespace MVC6.Training
             //    app.UseDeveloperExceptionPage();
             //}
 
-            app.UseMiddleware();
+            //app.UseMiddleware();
 
             //app.Run(async (context) =>
             //{
