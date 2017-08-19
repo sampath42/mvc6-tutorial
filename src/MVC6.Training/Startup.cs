@@ -80,6 +80,14 @@ namespace MVC6.Training
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            app.Map("/mvc6", helloApp =>
+            {
+                helloApp.Run(async (HttpContext context) =>
+                {
+                    await context.Response.WriteAsync("Hello ASP.NET MVC 6");
+                });
+            });
+
             //loggerFactory.AddConsole();
 
             //if (env.IsDevelopment())
