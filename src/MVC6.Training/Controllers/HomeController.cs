@@ -16,6 +16,7 @@ namespace MVC6.Training.Controllers
     public class HomeController : Controller
     {
         MyConfig _config;
+
         public HomeController(MyConfig config)
         {
             this._config = config;
@@ -23,9 +24,10 @@ namespace MVC6.Training.Controllers
 
         //[Route("index")]
         //[Route("~/")]
-        public IActionResult Index()
+        public IActionResult Index([FromServices] IFoo foo)
         {
             ViewBag.AppName = this._config.AppName;
+            ViewBag.FromServices = foo.GetFoo();
             return View(new Person() { Name = this._config.AppName });
         }
 
