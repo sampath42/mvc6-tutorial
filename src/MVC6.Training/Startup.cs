@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using MVC6.Training.Filters;
 
 namespace MVC6.Training
 {
@@ -51,8 +52,10 @@ namespace MVC6.Training
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(new MyConfig { AppName = config.GetSection("app:appName").Value });
-            //services.AddSingleton<IFoo, Foo>();
+            services.AddSingleton<LogFilter>();
             services.AddTransient<IFoo, Foo>();
+            services.AddTransient<ILog, Log>();
+
             //services.AddScoped<IFoo, Foo>();  
 
             services.AddMvc(options =>

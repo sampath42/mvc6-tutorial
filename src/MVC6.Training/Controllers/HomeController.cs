@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MVC6.Training.Models;
+using MVC6.Training.Filters;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -31,6 +32,8 @@ namespace MVC6.Training.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("home/submit",Name = "Submit")]
+        //[ServiceFilter(typeof(LogFilter))]
+        [TypeFilter(typeof(LogFilter),Arguments = new object[] { "myLogger"})]
         public IActionResult Submit(Person person)
         {
             return View("Index", person);

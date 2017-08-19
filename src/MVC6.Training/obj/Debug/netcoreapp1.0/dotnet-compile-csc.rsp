@@ -171,5 +171,7 @@
 "C:\JenkinsVM\mvc6-tutorial\src\MVC6.Training\Startup.cs"
 "C:\JenkinsVM\mvc6-tutorial\src\MVC6.Training\Controllers\HomeController.cs"
 "C:\JenkinsVM\mvc6-tutorial\src\MVC6.Training\Controllers\PersonController.cs"
+"C:\JenkinsVM\mvc6-tutorial\src\MVC6.Training\Controllers\PocoController.cs"
+"C:\JenkinsVM\mvc6-tutorial\src\MVC6.Training\Filters\LogFilter.cs"
 "C:\JenkinsVM\mvc6-tutorial\src\MVC6.Training\Models\Person.cs"
 "C:\JenkinsVM\mvc6-tutorial\src\MVC6.Training\Views\AppNameTagHelper.cs"
