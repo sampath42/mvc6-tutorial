@@ -12,18 +12,16 @@ using MVC6.Training.Filters;
 namespace MVC6.Training.Controllers
 {
     //[Route("[controller]")]
-    //[Route("home")]
     public class HomeController : Controller
     {
         MyConfig _config;
-
         public HomeController(MyConfig config)
         {
             this._config = config;
         }
 
-        //[Route("index")]
-        //[Route("~/")]
+        [Route("index")]
+        [Route("~/")]
         public IActionResult Index([FromServices] IFoo foo)
         {
             ViewBag.AppName = this._config.AppName;
@@ -31,9 +29,35 @@ namespace MVC6.Training.Controllers
             return View(new Person() { Name = this._config.AppName });
         }
 
-        [HttpPost]
+        [Route("[action]")]
+        public IActionResult About()
+        {
+            return new ContentResult() { Content = "About" };
+        }
+
+        //[Route("{action=contact}")]
+        public IActionResult Contact()
+        {
+            return new ContentResult() { Content = "Contact" };
+        }
+
+        [Route("RouteParameters")]
+        [Route("RouteParameters/{s?}")]
+        [Route("RouteParameters/{s}/{i?}")]
+        [Route("RouteParameters/{s}/{i}")]
+        public string RouteParameters(string s, int i = 10)
+        {
+            return $"{i} and {s}";
+        }
+
+        [Route("defaultparam/{type=en}")]
+        public IActionResult DefaultRouteParamValue(string type)
+        {
+            return new ContentResult() { Content = type };
+        }
+        
         [ValidateAntiForgeryToken]
-        [Route("home/submit",Name = "Submit")]
+        [HttpPost("home/submit",Name = "Submit")]
         //[ServiceFilter(typeof(LogFilter))]
         [TypeFilter(typeof(LogFilter),Arguments = new object[] { "myLogger"})]
         public IActionResult Submit(Person person)

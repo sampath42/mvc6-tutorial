@@ -9,7 +9,7 @@ namespace MVC6.Training.Models
     public class Person
     {
         [Required]
-        [MinLength(100)]
+        [MinLength(10)]
         public string Name { get; set; }
     }
 }
