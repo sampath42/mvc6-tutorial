@@ -55,7 +55,8 @@ namespace MVC6.Training
             services.AddSingleton<LogFilter>();
             services.AddTransient<IFoo, Foo>();
             services.AddTransient<ILog, Log>();
-            services.AddScoped<IFoo, Foo>();  
+
+            //services.AddScoped<IFoo, Foo>();  
 
             services.AddMvc(options =>
             {
@@ -86,12 +87,12 @@ namespace MVC6.Training
                     template: "{area}/{controller}/{action}",
                     defaults: new { controller = "Home", action = "Index" });
 
-                routes.MapRoute("default2", "{controller}/{action}",
-                    new
-                    {
-                        action = "Index",
-                        controller = "Home"
-                    });
+                //routes.MapRoute("default2", "{controller}/{action}",
+                //    new
+                //    {
+                //        action = "Index",
+                //        controller = "Home"
+                //    });
             });
 
             app.Map("/mvc6", helloApp =>
