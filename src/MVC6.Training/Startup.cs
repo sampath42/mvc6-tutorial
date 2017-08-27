@@ -52,19 +52,20 @@ namespace MVC6.Training
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(new MyConfig { AppName = config.GetSection("app:appName").Value });
-            services.AddSingleton<LogFilter>();
+            //services.AddSingleton<LogFilter>();
             services.AddTransient<IFoo, Foo>();
             services.AddTransient<ILog, Log>();
 
-            //services.AddScoped<IFoo, Foo>();  
-
+            services.AddScoped<MyActionFilter>();  
+            
             services.AddMvc(options =>
             {
                 // will use with web api
-                //options.OutputFormatters.Add(new Microsoft.AspNetCore.Mvc.Formatters.Xml.d())
-                //options.RespectBrowserAcceptHeader = true;
+                options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                options.RespectBrowserAcceptHeader = true;
 
-                //options.Filters.Add     
+                //options.Filters.Add(typeof(MyActionFilter));
 
             }).AddViewOptions(options =>
             {
@@ -103,6 +104,7 @@ namespace MVC6.Training
                 });
             });
 
+            //app.UserRuntimeInfoPage();
             //loggerFactory.AddConsole();
 
             //if (env.IsDevelopment())

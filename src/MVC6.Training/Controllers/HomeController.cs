@@ -55,7 +55,14 @@ namespace MVC6.Training.Controllers
         {
             return new ContentResult() { Content = type };
         }
-        
+
+        //[MyResourceFilter(Order = 2)]
+        //[MyActionFilter(Order = 1)]
+        public IActionResult SomeResource()
+        {
+            return Content("Some Resource");
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost("home/submit",Name = "Submit")]
         //[ServiceFilter(typeof(LogFilter))]
